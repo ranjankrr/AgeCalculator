@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exact Age Calculator</title>
+	<link rel='stylesheet' href='index12.css'/>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src='script.js'></script>
+</head>
+<body>
+    <div id="parentDiv">
+       <div id="main_container">
+         <div id="heading">
+             <h2>Age Calculator</h2>    
+         </div>  
+        <div id="birth_date_input">
+            <label for="date" id="labelBirth"><b>Birth Date</b></label> 
+            <input type="date" id="birth_date"><br>
+        </div>
+        <br/>
+        <div id="calculate">Calculate your age</div>
+        <div id="age_container"><span id="exact_age">Here Received Your Age</span></div>
+
+    </div>
+</div>
+<!--=============================here javaScript code================--> 
+<script>
+       let  birthDate = document.getElementById("calculate");
+       birthDate.addEventListener('click',function(){
+           birthDate.style.cssText="background-color:green;color:white;";  
+       });
+       let ageCalculator = document.getElementById("heading");
+           ageCalculator.addEventListener('click',()=>{
+                 alert("This Calculator Find Your Age Till Today?")
+           });
+            const label = document.getElementById("labelBirth");
+                label.addEventListener("mouseover",()=>{
+                   alert("Filled Your Birth Date");
+                });
+            var displayAge = document.getElementById("age_container");
+                displayAge.addEventListener('mouseover',function(){
+                    alert("Display Your age");
+                     
+                });
+</script>
+</body>
+</html>
