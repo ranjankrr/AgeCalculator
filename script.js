@@ -1,31 +1,50 @@
-$(document).ready(function(){
-    $("#calculate").click(function(){
-        var mdate = $("#birth_date").val().toString();
-        var yearThen = parseInt(mdate.substring(0,4), 10);
-        var monthThen = parseInt(mdate.substring(5,7), 10);
-        var dayThen = parseInt(mdate.substring(8,10), 10);
+const submit = document.getElementById("submit");
+const reset = document.getElementById("reset");
+ const month =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31];
+submit.addEventListener("click", ()=>{
+    let dateofbirth = document.getElementById("date-birth").value;
+    let todayofdate =document.getElementById("current-date").value;
+    //==== convert user input into date object============================
+    const startDate = new Date(dateofbirth);
+    const currentDate = new Date(todayofdate);
+    //==============Your date of birth code here=-======================
+     let startYear = startDate.getFullYear();
+     let startMonth = startDate.getMonth() + 1;
+     let startDay = startDate.getDate();
+    //==============your today data code here==========================
+     let currentYear = currentDate.getFullYear();
+     let currentMonth = currentDate.getMonth() +1;
+     let currentDay = currentDate.getDate();
+     let bothYear =currentYear - startYear;
+     let bothMonth, bothDate;
+     if(currentMonth >= startMonth){
+         bothMonth = currentMonth - startMonth;
+         
+     }
+     else{
+         bothYear--;
+         bothMonth = 12 + currentMonth - startMonth;
         
-        var today = new Date();
-        var birthday = new Date(yearThen, monthThen-1, dayThen);
-        
-        var differenceInMilisecond = today.valueOf() - birthday.valueOf();
-        
-        var year_age = Math.floor(differenceInMilisecond / 31536000000);
-        var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
-        
-        if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
-            alert("Happy B'day!!!");
-        }
-        
-        var month_age = Math.floor(day_age/30);
-        
-        day_age = day_age % 30;
-        
-        if (isNaN(year_age) || isNaN(month_age) || isNaN(day_age)) {
-            $("#exact_age").text("Invalid birthday - Please try again!");
-        }
-        else {
-            $("#exact_age").html("You are<br/><span id=\"age\">" + year_age + " years " + month_age + " months " + day_age + " days</span>");
-        }
-    });
+     }
+     if(currentDay >= startDay){
+         bothDate = currentDay - startDay;
+     }
+     else{
+         bothDate--;
+         let days = month[currentMonth - 2];
+         bothDate = days + currentDay - startDay;
+         if(bothMonth < 0){
+             bothMonth = 11;
+             bothYear--;
+         }
+     }
+     
+     document.getElementById("display-age").value=`Your Age: ${bothYear} Years ${bothMonth} Months ${bothDate} Days`;
+});
+//========================reset-button code here==============
+reset.addEventListener("click",()=>{
+    let dateofbirth = document.getElementById("date-birth").value ="";
+    let todayofdate =document.getElementById("current-date").value ="";
+    document.getElementById("display-age").value="";
+
 });
